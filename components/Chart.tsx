@@ -1,4 +1,6 @@
 "use client";
+import { Card, AreaChart, Title, Text } from "@tremor/react";
+import { Tillana } from "next/font/google";
 
 const data = [
   {
@@ -19,5 +21,21 @@ const data = [
 ];
 
 export default function Chart() {
-  return <div>chart</div>;
+  return (
+    <Card className="mt-8">
+      <Title>Performance</Title>
+      <Text>Comparasion between Sales and Profit</Text>
+      <AreaChart
+        className="mt-80 h-80"
+        data={data}
+        categories={["Sales", "Profit"]}
+        index="Month"
+        colors={["indigo", "fuchsia"]}
+        valueFormatter={(number: number) =>
+          `$ ${Intl.NumberFormat("us").format(number).toString()}`
+        }
+        yAxisWidth={60}
+      />
+    </Card>
+  );
 }
